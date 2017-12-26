@@ -3,69 +3,73 @@
   <head>
     <title>no means no, roy</title>
     <style>
-      body { font-family:sans-serif; font-size: 12px; }
-      section { text-align: center; margin: 100px; }
-      section span { font-size: 28px; font-weight: bold; }
+      body { font-family:Helvetica, Helvetica Neue, Arial, sans-serif; font-size: 1.5em; color:#8e8b8a; }
+      section { text-align: center; margin: 100px 0; }
+      section span { font-size: 2em; font-weight: bold; }
     </style>
   </head>
-  <section id="countup">
-    <h1>It has been:</h1>
-    <p>
-      <span id="days">00</span> days,
-      <span id="hours">00</span> hours,
-      <span id="mins">00</span> minutes,
-      <span id="secs">00</span> seconds
-    </p>
-    <p>
-      since Roy Moore has refused to concede the election
-    </p>
-  </section>
-  <section id="countdown">
-    <h1>In:</h1>
-    <p>
-      <span id="datedate">00</span> days
-    </p>
-    <p>Roy Moore's non-concession will be old enough for him to take on a date</p>
-  </section>
-  <script>
-    var electionDate = new Date('2017-12-12T23:00');
-    var dateDate = new Date('2031-12-12T23:00');
-    var $ = document.getElementById.bind(document);
-    var $count = {
-      days: $('days'),
-      hours: $('hours'),
-      mins: $('mins'),
-      secs: $('secs'),
-    };
+  <body>
+    <div id="wrapper">
+      <section id="countup">
+        <h1>It has been:</h1>
+        <p>
+          <span id="days">00</span> days
+          <span id="hours">00</span> hours
+          <span id="mins">00</span> minutes
+          <span id="secs">00</span> seconds
+        </p>
+        <p>
+          since Roy Moore has refused to concede the election
+        </p>
+      </section>
+      <section id="countdown">
+        <h1>In:</h1>
+        <p>
+          <span id="datedate">00</span> days
+        </p>
+        <p>Roy Moore's non-concession will be old enough for him to take on a date</p>
+      </section>
+    </div>
+    <script>
+      var electionDate = new Date('2017-12-12T23:00');
+      var dateDate = new Date('2031-12-12T23:00');
+      var $ = document.getElementById.bind(document);
+      var $count = {
+        days: $('days'),
+        hours: $('hours'),
+        mins: $('mins'),
+        secs: $('secs'),
+      };
 
-    function countUp() {
-      var curTime = new Date;
-      var diff = curTime - electionDate;
-      var time = new function() {
-        var _days = diff / 86400000;
-        this.days = Math.floor(_days);
+      function countUp() {
+        var curTime = new Date;
+        var diff = curTime - electionDate;
+        var time = new function() {
+          var _days = diff / 86400000;
+          this.days = Math.floor(_days);
 
-        var _hours = (_days - this.days) * 24;
-        this.hours = Math.floor(_hours);
+          var _hours = (_days - this.days) * 24;
+          this.hours = Math.floor(_hours);
 
-        var _mins = (_hours - this.hours) * 60;
-        this.mins = Math.floor(_mins);
+          var _mins = (_hours - this.hours) * 60;
+          this.mins = Math.floor(_mins);
 
-        var _secs = (_mins - this.mins) * 60;
-        this.secs = Math.floor(_secs);
-      }()
+          var _secs = (_mins - this.mins) * 60;
+          this.secs = Math.floor(_secs);
+        }()
 
-      for (key in $count) {
-        $count[key].innerText = time[key];
+        for (key in $count) {
+          $count[key].innerText = time[key];
+        }
+      };
+
+      function countDown() {
+        var diff = (dateDate - new Date) / 86400000;
+        $('datedate').innerText = Math.ceil(diff);
       }
-    };
-
-    function countDown() {
-      var diff = (dateDate - new Date) / 86400000;
-      $('datedate').innerText = Math.ceil(diff);
-    }
-    setInterval(countUp, 1000);
-    countUp();
-    countDown();
-  </script>
+      setInterval(countUp, 1000);
+      countUp();
+      countDown();
+    </script>
+  </body>
 </html>
