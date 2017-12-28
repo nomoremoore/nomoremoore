@@ -7,7 +7,7 @@
       section { text-align: center; margin: 100px 0; }
       section span { font-size: 2em; font-weight: bold; }
       p.header { font-weight: bold; }
-      #runners { position: absolute; bottom: 0; left:0; z-index:-1; width: 10000px;}
+      #runners { position: absolute; top: 0; left:0; z-index:-1; width: 10000px;}
     </style>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -94,21 +94,24 @@
           $pred = $('predator'),
           $prey = $('prey'),
           offset = {top: Number($runners.style.top), left: Number($runners.style.left)},
-          speed = 10 + Math.random() * 100;
+          speed = 10 + Math.random() * 30;
+
+      $pred.style.transform = 'rotate(-10deg)';
 
       setInterval(function() {
           var vpwidth = window.innerWidth;
           var vpheight = window.innerHeight;
           if (offset.left >= vpwidth) {
-              $pred.height = 500 * Math.random();
-              $prey.height = 400 * Math.random();
-              offset.top = (vpheight * Math.random()) - Math.max($pred.height, $prey.height);
+              $pred.height = Math.max(50, vpheight/2 * Math.random());
+              $prey.height = Math.max(50, vpheight/2 * Math.random());
+              offset.top = vpheight * Math.random();
               offset.left = 0;
               $runners.style.left = 0;
               $runners.style.top = offset.top+'px';
-              speed = 10 + Math.random() * 100;
+              speed = 10 + Math.random() * 30;
           } else {
               offset.left += speed;
+              $pred.style.transform = $pred.style.transform === 'none' ? 'rotate(-10deg)' : 'none';
               $runners.style.left = offset.left+'px';
           }
       }, 100);
