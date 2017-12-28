@@ -104,7 +104,7 @@
           if (offset.left >= vpwidth) {
               $pred.height = Math.max(50, vpheight/2 * Math.random());
               $prey.height = Math.max(50, vpheight/2 * Math.random());
-              offset.top = vpheight * Math.random();
+              offset.top = Math.min(vpheight * Math.random(), vpheight - Math.max($pred.height, $prey.height));
               offset.left = 0;
               $runners.style.left = 0;
               $runners.style.top = offset.top+'px';
