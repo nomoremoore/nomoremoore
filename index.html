@@ -3,10 +3,11 @@
   <head>
     <title>no means no, roy</title>
     <style>
-      body { font-family:Helvetica, Helvetica Neue, Arial, sans-serif; font-size: 1.5em; color:#8e8b8a; }
+      body { font-family:Helvetica, Helvetica Neue, Arial, sans-serif; font-size: 1.5em; color:#8e8b8a; overflow-x: hidden;}
       section { text-align: center; margin: 100px 0; }
       section span { font-size: 2em; font-weight: bold; }
       p.header { font-weight: bold; }
+      #runners { position: absolute; bottom: 0; left:0; z-index:-1; width: 10000px;}
     </style>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -41,6 +42,12 @@
         <p>his refusal to concede will be old enough for him to date</p>
       </section>
     </div>
+
+    <div id="runners">
+      <img src='moore.png'/>
+      <img src='girl.png'/>
+    </div>
+
     <script>
       var electionDate = new Date('2017-12-12T23:00');
       var dateDate = new Date('2031-12-12T23:00');
@@ -81,6 +88,21 @@
       setInterval(countUp, 1000);
       countUp();
       countDown();
+    </script>
+    <script>
+      var $runners = $('runners');
+      var offset = {top: Number($runners.style.top), left: Number($runners.style.left)};
+
+      setInterval(function() {
+          var vpwidth = window.innerWidth;
+          if (offset.left >= vpwidth) {
+              offset.left = 0;
+              $runners.style.left = 0;
+          } else {
+              offset.left += 10;
+              $runners.style.left = offset.left+'px';
+          }
+      }, 100);
     </script>
   </body>
 </html>
