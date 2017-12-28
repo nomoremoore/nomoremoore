@@ -44,8 +44,8 @@
     </div>
 
     <div id="runners">
-      <img src='moore.png'/>
-      <img src='girl.png'/>
+      <img src='moore.png' id="predator" />
+      <img src='girl.png' id="prey" />
     </div>
 
     <script>
@@ -90,16 +90,25 @@
       countDown();
     </script>
     <script>
-      var $runners = $('runners');
-      var offset = {top: Number($runners.style.top), left: Number($runners.style.left)};
+      var $runners = $('runners'),
+          $pred = $('predator'),
+          $prey = $('prey'),
+          offset = {top: Number($runners.style.top), left: Number($runners.style.left)},
+          speed = 10 + Math.random() * 100;
 
       setInterval(function() {
           var vpwidth = window.innerWidth;
+          var vpheight = window.innerHeight;
           if (offset.left >= vpwidth) {
+              $pred.height = 500 * Math.random();
+              $prey.height = 400 * Math.random();
+              offset.top = (vpheight * Math.random()) - Math.max($pred.height, $prey.height);
               offset.left = 0;
               $runners.style.left = 0;
+              $runners.style.top = offset.top+'px';
+              speed = 10 + Math.random() * 100;
           } else {
-              offset.left += 10;
+              offset.left += speed;
               $runners.style.left = offset.left+'px';
           }
       }, 100);
